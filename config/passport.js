@@ -67,4 +67,17 @@ async (accessToken, refreshToken, profile, done) => {
 }
 ));
 
+passport.serializeUser((user, done) => {
+    done(null, {user_id: user._id, fullName: user.full_name});
+});
+
+passport.deserializeUser(async (user, done) => {
+    try {
+        const foundUser = await User.findByPk(user.user_id);
+        done(null, foundUser);
+    } catch (err) {
+        done(err, null);
+    }
+});
+
 module.exports = passport;
