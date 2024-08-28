@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const {db, passport} = require('./config');
+const authRoutes = require('./routes/authRoutes');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple');
 const path = require('path');
