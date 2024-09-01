@@ -40,9 +40,9 @@ const resetUserPassword = async (token, newPassword) => {
     const hashedToken = await bcrypt.hash(token, 10);
     const resetRecord = await PasswordReset.findOne({where: {reset_token: hashedToken, used: false}});
 
-    if(!resetRecord || resetRecord.expires_at < Date.now(){
+    if(!resetRecord || resetRecord.expires_at < Date.now()){
         return false;
-    });
+    };
 
     const user = await User.findByPk(resetRecord._id);
     const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -51,7 +51,7 @@ const resetUserPassword = async (token, newPassword) => {
 
     return true;
 
-}
+};
 
 
 
