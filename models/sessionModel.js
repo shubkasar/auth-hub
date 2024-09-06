@@ -32,7 +32,7 @@ const Session = sequelize.define('Session', {
     allowNull: true,
   },
 }, {
-  tableName: 'Sessions',
+  tableName: 'sessions',
   timestamps: false,
 });
 

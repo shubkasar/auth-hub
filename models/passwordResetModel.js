@@ -32,7 +32,7 @@ const PasswordReset = sequelize.define('PasswordReset', {
     defaultValue: false,
   },
 }, {
-  tableName: 'Password_resets',
+  tableName: 'password_resets',
   timestamps: false,
 });
 

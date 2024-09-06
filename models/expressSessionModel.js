@@ -15,7 +15,7 @@ const ExpressSession = sequelize.define('ExpressSession', {
     allowNull: false,
   },
 }, {
-  tableName: 'Express_sessions',
+  tableName: 'express_sessions',
   timestamps: false,
 });
 

@@ -37,12 +37,14 @@ const createPasswordResetToken = async (email) => {
 };
 
 const resetUserPassword = async (token, newPassword) => {
-    const hashedToken = await bcrypt.hash(token, 10);
-    const resetRecord = await PasswordReset.findOne({where: {reset_token: hashedToken, used: false}});
+    // const hashedToken = await bcrypt.hash(token, 10);
+    const resetRecord = await PasswordReset.findOne({where: {reset_token: token, used: false}});
 
     if(!resetRecord || resetRecord.expires_at < Date.now()){
         return false;
     };
+
+    // const isMatch = await bcrypt.compare(token)
 
     const user = await User.findByPk(resetRecord._id);
     const hashedPassword = await bcrypt.hash(newPassword, 10);

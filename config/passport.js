@@ -9,7 +9,7 @@ const {User, AuthProvider} = require('../models');
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "auth/google/callback"
+    callbackURL: "/auth/google/callback"
 },
 async (accessToken, refreshToken, profile, done) => {
     try{
@@ -22,7 +22,7 @@ async (accessToken, refreshToken, profile, done) => {
 
         if(!user){
             const hashedPassword = await bcrypt.hash(Math.random().toString(36).slice(-8), 10);
-            user = await User.create({ email_id: email, pasword_hash: hashedPassword, username: username, full_name: fullName});
+            user = await User.create({ email_id: email, password_hash: hashedPassword, username: username, full_name: fullName});
             await AuthProvider.create({_id: user._id, provider_name: 'google', provider_uid: googleId});
         } else {
             user = await User.findByPk(user._id);
@@ -31,7 +31,7 @@ async (accessToken, refreshToken, profile, done) => {
         return done(null, user);
 
     } catch(err) {
-        return done(null, user);
+        return done(err, null);
     }
 }
 ));
@@ -54,7 +54,7 @@ async (accessToken, refreshToken, profile, done) => {
 
         if(!user){
             const hashedPassword = await bcrypt.hash(Math.random().toString(36).slice(-8), 10);
-            user = await User.create({email_id: email, pasword_hash: hashedPassword, username: username, full_name: fullName});
+            user = await User.create({email_id: email, password_hash: hashedPassword, username: username, full_name: fullName});
             await AuthProvider.create({_id: user._id, provider_name: 'facebook', provider_uid: facebookId});
         } else {
             user = await User.findByPk(user._id);

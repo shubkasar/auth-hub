@@ -28,7 +28,7 @@ const AuthProvider = sequelize.define('AuthProvider', {
     defaultValue: DataTypes.NOW,
   },
 }, {
-  tableName: 'Auth_providers',
+  tableName: 'auth_providers',
   timestamps: false,
 });
 
